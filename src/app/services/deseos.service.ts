@@ -9,7 +9,7 @@ const { Storage } = Plugins;
 })
 export class DeseosService {
 
-  listas: Lista[] = [];
+  listas: Lista[];
 
   constructor() {
     this.cargarListasStorage();
@@ -19,9 +19,13 @@ export class DeseosService {
 
   agregarLista( titulo: string ) {
     const nuevaLista = new Lista( titulo );
-    this.listas.push( nuevaLista );
+    if(this.listas === null) {
+      this.listas = [];
+      this.listas.push(nuevaLista);
+    } else {
+      this.listas.push(nuevaLista);
+    }
     this.guardarListaStorage();
-
     return nuevaLista.id;
   }
 
@@ -30,7 +34,7 @@ export class DeseosService {
     return this.listas.find( listaData => listaData.id === id );
   }
 
-  borrarListaStorage( lista: Lista ){
+  borrarListaStorage( lista: Lista ) {
     this.listas = this.listas.filter( listaData => listaData.id !== lista.id );
     this.guardarListaStorage();
   }

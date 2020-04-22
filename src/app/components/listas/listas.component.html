@@ -1,3 +1,30 @@
-<p>
-  listas works!
-</p>
+
+
+<ion-list class="animated fadeInDown">
+
+  <ion-list-header color="dark">
+      <ion-label>Tareas</ion-label>
+  </ion-list-header>
+
+  <ion-item-sliding *ngFor="let lista of service.listas"  class="animated fadeInDown">
+    
+    <ion-item-options side="start">
+      <ion-item-option color="danger" (click)="borrarLista(lista)">
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+    <ion-item-options side="end">
+        <ion-item-option (click)="actualizarNombreLista(lista)">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-item-option>
+    </ion-item-options>
+
+    <ion-item color="dark" ion-item detail="true" (click)="listaSeleccionada( lista )">
+      <ion-label> {{ lista.titulo }} </ion-label>
+      <ion-badge mode="ios" color="light" slot="end" *ngIf="lista.items.length !== 0"> {{ lista.items.length }}</ion-badge>
+    </ion-item> 
+
+  </ion-item-sliding>
+  
+</ion-list>
