@@ -1,13 +1,25 @@
+<!-- <div class="ion-text-center" *ngIf="vacio" style="height: 100%">
+  <div style="margin-top: 50%">
+      <img src="../../assets/emptylist.png">
+      <br><br>
+      <ion-label style="color: grey">No tiene tareas pendientes actualmente.</ion-label>
+  </div>
+</div> -->
 
-
+<!-- Main List -->
 <ion-list class="animated fadeInDown">
 
-  <ion-list-header color="dark">
+<!-- Header List -->
+  <ion-list-header color="dark" >
       <ion-label>Tareas</ion-label>
   </ion-list-header>
 
-  <ion-item-sliding *ngFor="let lista of service.listas"  class="animated fadeInDown">
-    
+<!-- For List -->
+<ng-container *ngFor="let lista of service.listas">
+
+<!--  items -->
+  <ion-item-sliding *ngIf="lista.terminada === terminada"  class="animated fadeInDown">
+
     <ion-item-options side="start">
       <ion-item-option color="danger" (click)="borrarLista(lista)">
         <ion-icon name="trash" slot="icon-only"></ion-icon>
@@ -24,7 +36,10 @@
       <ion-label> {{ lista.titulo }} </ion-label>
       <ion-badge mode="ios" color="light" slot="end" *ngIf="lista.items.length !== 0"> {{ lista.items.length }}</ion-badge>
     </ion-item> 
-
+  
   </ion-item-sliding>
+
+</ng-container>
   
 </ion-list>
+

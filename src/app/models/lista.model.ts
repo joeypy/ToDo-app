@@ -1,6 +1,5 @@
 import { ListaItem } from './lista-item.model';
 
-
 export class Lista {
     id: number;
     titulo: string;
@@ -17,10 +16,5 @@ export class Lista {
         this.id = new Date().getTime();
     }
 
-    filtrado(listas: Lista[], completada: boolean) {
-      return null;
-    }
-    // filter(arg0: (lista: any) => boolean) {
-    //   throw new Error('Method not implemented.');
-    // }
 }
+

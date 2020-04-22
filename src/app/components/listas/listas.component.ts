@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnChanges } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { DeseosService } from 'src/app/services/deseos.service';
 import { Router } from '@angular/router';
 import { Lista } from 'src/app/models/lista.model';
@@ -9,7 +9,7 @@ import { AlertController, ToastController, IonList } from '@ionic/angular';
   templateUrl: './listas.component.html',
   styleUrls: ['./listas.component.scss'],
 })
-export class ListasComponent implements OnChanges {
+export class ListasComponent {
 
   @ViewChild( IonList, {static: true} ) lista: IonList;
   @Input() terminada = true;
@@ -21,16 +21,7 @@ export class ListasComponent implements OnChanges {
               public toastController: ToastController,
               private router: Router) {}
 
-  ngOnChanges() {
-    if (this.terminada){
-      this.listas.filter( lista => lista.terminada ===  this.terminada);
-      console.log("Terminada TRUE: ", this.listas);
-    } else {
-      this.listas.filter( lista => lista.terminada !==  this.terminada);
-      console.log("Terminada FALSE: ", this.listas);
-    }
-  }
-
+  
   async actualizarNombreLista(lista: Lista) {
     const alert = await this.alertCtrl.create({
       header: 'Cambiar título',
@@ -77,7 +68,7 @@ export class ListasComponent implements OnChanges {
 
   listaSeleccionada(lista: Lista) {
     if( this.terminada ) {
-      this.router.navigateByUrl(`/tabs/tab1/agregar/${ lista.id }`);
+      this.router.navigateByUrl(`/tabs/tab2/agregar/${ lista.id }`);
     } else {
       this.router.navigateByUrl(`/tabs/tab1/agregar/${ lista.id }`);
     }
